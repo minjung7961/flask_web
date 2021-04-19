@@ -24,6 +24,11 @@ def articles():
     # print(articles[0]['body'])
     return render_template('articles.html', articles = articles)
 
+@app.route('/article/<int:id>') #/<id> 는 params 임 이걸 써먹을것임 (int만)
+def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
+    print(id)
+    return "Success"
+
 
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
