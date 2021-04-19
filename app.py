@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-
+from data import Articles
 
 app = Flask(__name__)
 
@@ -20,7 +20,9 @@ def about():
 
 @app.route('/articles')
 def articles():
-    return render_template('articles.html', hello = 'Gary kim')
+    articles = Articles()
+    # print(articles[0]['body'])
+    return render_template('articles.html', articles = articles)
 
 
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
