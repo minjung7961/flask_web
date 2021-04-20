@@ -1,0 +1,25 @@
+{% extends 'layouts.html' %}
+{% block body %}
+<div class="main-container">
+<!-- horizontal Basic Forms Start -->
+<!--
+<div class="pd-20 card-box mb-30">
+    <div class="clearfix">
+        <div class="pull-left">
+            <h4 class="text-blue h4">Writing Lists Board</h4>
+            <p class="mb-30">Input your Words !!</p>
+        </div>
+-->        
+    </div>
+    <form action = "/add_articles" method="post">
+        <input type="text" name="author" placeholder="작성자" required>
+        <input type="text" name="title" placeholder="제목" required>
+        <input type="text" name="desc" placeholder="내용" required>
+        <input type="submit" value="작성">
+    </form>
+    
+</div>
+
+<!-- horizontal Basic Forms End -->
+</div>
+{% endblock %}
