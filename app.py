@@ -69,11 +69,20 @@ def add_articles():
         cursor.execute(sql_3,input_data)
         db.commit()
         print("몇번째 줄일까?",cursor.rowcount)
-        # db.close()
+        # db.close() 오류나서걍 주석처리함
         return redirect("/articles")
     else:
         return render_template("add_articles.html")
-    
+
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
+    cursor = db.cursor()
+    sql = f'DELETE FROM topic WHERE id = {id};'
+    print("sql")
+    cursor.execute(sql)
+    db.commit()
+    return redirect("/articles")
+
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
     app.run() # 애가 서버 실행시켜줌
