@@ -18,10 +18,17 @@ sql = '''
 	PRIMARY KEY (id)
 	) ENGINE=innoDB DEFAULT CHARSET=utf8;
 '''
+
+sql_2 = '''
+    INSERT INTO `topic` 
+    (`title`, `body`, `author`) 
+    VALUES 
+    ('부산', '부산와서 갈매기를 못봤네 ㅠㅠ', '김태경');
+'''
 # 쿼리문을 날려주기 준비해주는 칭구
 cursor = db.cursor() 
 # 커서문 db에 날려주기
-cursor.execute(sql)
+cursor.execute(sql_2)
 # 적용
 db.commit()
 # 커서 커밋 죽임
