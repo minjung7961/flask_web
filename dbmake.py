@@ -25,17 +25,23 @@ sql_2 = '''
     VALUES 
     ('부산', '부산와서 갈매기를 못봤네 ㅠㅠ', '김태경');
 '''
+
+sql_3 = '''
+    SELECT * FROM busan.topic;
+'''
 # 쿼리문을 날려주기 준비해주는 칭구
 cursor = db.cursor() 
+
 # 커서문 db에 날려주기
-cursor.execute(sql_2)
+# cursor.execute(sql_2)
 # 적용
-db.commit()
+# db.commit()
 # 커서 커밋 죽임
-db.close()
+# db.close()
 # 쿼리문 db 에 날려주는 문장 -> execute(쿼리문)
 # cursor.execute('SELECT * FROM users;')
+cursor.execute(sql_3)
 # 쿼리문 결과를 받아와주는 문장
-# users = cursor.fetchall()
+users = cursor.fetchall()
 # 결과보쟈아ㅏ
-# print(users)
+print(users)
