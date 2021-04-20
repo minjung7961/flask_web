@@ -33,6 +33,7 @@ def about():
 def articles():
     sql = 'SELECT * FROM topic;'
     cursor.execute(sql)
+    # 여러줄 사용할 것이니 fetchAll()사용
     topics = cursor.fetchall()
     print(topics)
     # articles = Articles()
@@ -41,10 +42,15 @@ def articles():
 
 @app.route('/article/<int:id>') #/<id> 는 params 임 이걸 써먹을것임 (int만)
 def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
-    articles = Articles()
-    article = articles[id-1]
-    print(articles[id-1])
-    return render_template("article.html", article = article)
+    sql = f'SELECT * FROM topic WHERE id = {id};'
+    cursor.execute(sql)
+    # 한줄만출력하니 fetchone() 함수 사용
+    topic = cursor.fetchone()
+    print(topic)
+    # articles = Articles()
+    # article = articles[id-1]
+    # print(articles[id-1])
+    return render_template("article.html", article = topic)
 
 
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
