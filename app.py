@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from data import Articles
 import pymysql
 
@@ -14,7 +14,7 @@ db = pymysql.connect(
     db = 'busan'
 )
 
-cursor = db.cursor() 
+cursor = db.cursor()
 
 # 클라이언트가 http://localhost:5000/data 으로 get방식으로 요청들어왔을떄 hello world 문구를 리턴해 본다
 
@@ -31,6 +31,7 @@ def about():
 
 @app.route('/articles')
 def articles():
+    cursor = db.cursor()
     sql = 'SELECT * FROM topic;'
     cursor.execute(sql)
     # 여러줄 사용할 것이니 fetchAll()사용
@@ -42,6 +43,7 @@ def articles():
 
 @app.route('/article/<int:id>') #/<id> 는 params 임 이걸 써먹을것임 (int만)
 def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
+    cursor = db.cursor()
     sql = f'SELECT * FROM topic WHERE id = {id};'
     cursor.execute(sql)
     # 한줄만출력하니 fetchone() 함수 사용
@@ -54,12 +56,21 @@ def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
 
 @app.route('/add_articles', methods=["GET","POST"])
 def add_articles():
+    cursor = db.cursor()
     if request.method == 'POST':
+        sql_3 = "INSERT INTO `topic` (`title`, `body`, `author`) VALUES (%s, %s, %s);"
+        
         desc = request.form['desc']
         title = request.form['title']
         author = request.form['author']
+        input_data = [title,desc,author ]
+
         print(request.form)
-        return "SUCCESS"
+        cursor.execute(sql_3,input_data)
+        db.commit()
+        print("몇번째 줄일까?",cursor.rowcount)
+        # db.close()
+        return redirect("/articles")
     else:
         return render_template("add_articles.html")
     
