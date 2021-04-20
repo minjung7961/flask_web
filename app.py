@@ -55,7 +55,10 @@ def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
 @app.route('/add_articles', methods=["GET","POST"])
 def add_articles():
     if request.method == 'POST':
-        print(request)
+        desc = request.form['desc']
+        title = request.form['title']
+        author = request.form['author']
+        print(request.form)
         return "SUCCESS"
     else:
         return render_template("add_articles.html")
