@@ -1,9 +1,20 @@
 from flask import Flask, render_template
 from data import Articles
+import pymysql
 
 app = Flask(__name__)
 
 app.debug = True # 오류를 웹페이지 상에 보여주는 세팅 (베포할떈 False)
+
+db = pymysql.connect(
+    host = 'localhost',
+    port = 3306,
+    user = 'root',
+    password = '1234',
+    db = 'busan'
+)
+
+cursor = db.cursor() 
 
 # 클라이언트가 http://localhost:5000/data 으로 get방식으로 요청들어왔을떄 hello world 문구를 리턴해 본다
 
@@ -20,9 +31,13 @@ def about():
 
 @app.route('/articles')
 def articles():
-    articles = Articles()
+    sql = 'SELECT * FROM topic;'
+    cursor.execute(sql)
+    topics = cursor.fetchall()
+    print(topics)
+    # articles = Articles()
     # print(articles[0]['body'])
-    return render_template('articles.html', articles = articles)
+    return render_template('articles.html', articles = topics)
 
 @app.route('/article/<int:id>') #/<id> 는 params 임 이걸 써먹을것임 (int만)
 def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
