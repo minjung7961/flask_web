@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from data import Articles
 import pymysql
 
@@ -52,7 +52,14 @@ def article(id): # params 에 있던 id값임 python 이 알아서 넣어줌
     # print(articles[id-1])
     return render_template("article.html", article = topic)
 
-
+@app.route('/add_articles', methods=["GET","POST"])
+def add_articles():
+    if request.method == 'POST':
+        print(request)
+        return "SUCCESS"
+    else:
+        return render_template("add_articles.html")
+    
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
     app.run() # 애가 서버 실행시켜줌
