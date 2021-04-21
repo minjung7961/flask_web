@@ -1,0 +1,38 @@
+{% extends 'layouts.html' %}
+{% block body %}
+<h1 class="display-4">EDIT PAGE</h1>
+<p class="lead">This Application is build using by python and Flask Framework</p>
+<hr class="my-4">
+
+<form action="/edit" method="POST" onsubmit="return confirm('정말 수정 하시겠습니까?')">
+    <div class="form-group">
+        <label>TITLE</label>
+        <input class="form-control" type="text" name='title' placeholder="input your title" required>
+    </div>
+
+
+    <div class="form-group">
+        <label>DESCRIPTON</label>
+        <textarea class="form-control" name="desc" placeholder="input your description" required></textarea>
+    </div>
+    
+
+    <div class="form-group">
+        <label>AUHOR</label>
+        <input type="text" name='author' class="form-control" value="민쭁이" placeholder="input your name" disabled>
+    </div>
+
+
+    <div class="form-group">
+        <input class="btn btn-warning btn-lg btn-block" type="submit" value="수정하기" >
+    </div>
+
+    
+</form>
+
+<div class="form-group">
+    <a class="btn btn-primary btn-lg btn-block" href="/articles"> 돌아가기</a>       
+</div>
+
+
+{% endblock %}
