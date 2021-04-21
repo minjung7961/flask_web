@@ -4,7 +4,7 @@
 <p class="lead">This Application is build using by python and Flask Framework</p>
 <hr class="my-4">
 
-<form action="/edit" method="POST" onsubmit="return confirm('정말 수정 하시겠습니까?')">
+<form action="/{{article[0]}}/edit" method="POST" onsubmit="return confirm('정말 수정 하시겠습니까?')">
     <div class="form-group">
         <label>TITLE</label>
         <input class="form-control" type="text" name='title' value="{{article[1]}}" placeholder="input your title" required>
@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label>AUHOR</label>
-        <input type="text" name='author' class="form-control" value="{{article[3]}}" placeholder="input your name" disabled>
+        <input class="form-control" type="text" name="author" value="{{article[3]}}" placeholder="input your name" >
     </div>
 
 
