@@ -89,11 +89,7 @@ def edit(id):
     if request.method == "POST":
         title = request.form['title']
         desc = request.form['desc']
-        print(request.form["title"])
-        print(request.form["desc"])
-        print(request.form["author"])
         sql = f"UPDATE topic SET title = '{title}', body = '{desc}' WHERE (id = {id});"
-        print(sql)
         cursor.execute(sql)
         db.commit()
         return redirect("/articles")
@@ -105,6 +101,23 @@ def edit(id):
         # print(topic)
         # db.commit()
         return render_template("article_edit.html",article = topic)
+
+@app.route('/register', methods=['POST','GET'])
+def register():
+    cursor = db.cursor()
+    if request.method == "GET":
+        return render_template("register.html")
+    else:
+        name = request.form['name']
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        value_lsit = [name, email, username, password]
+        sql =f"INSERT INTO users (`name`, `email`, `username`, `password`) VALUES ('{name}', '{email}', '{username}', '{password}');"
+        print(sql)
+        cursor.execute(sql)
+        db.commit()
+        return render_template("register.html")
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
     app.run() # 애가 서버 실행시켜줌

@@ -1,0 +1,45 @@
+{% extends 'layouts.html' %}
+{% block body %}
+<h1 class="display-4">EDIT PAGE</h1>
+<p class="lead">This Application is build using by python and Flask Framework</p>
+<hr class="my-4">
+
+<form action="/register" method="POST" onsubmit="return confirm('위와 같은 내용으로 회원가입 하시겠습니까?')">
+
+    <div class="form-group">
+        <label>NAME</label>
+        <input class="form-control" type="text" name='name' value="김민정" placeholder="input your name" required>
+    </div>
+
+
+    <div class="form-group">
+        <label>email</label>
+        <input class="form-control" type="text" name='email' value="alswjd7961@naver.com" placeholder="input your email" required>
+    </div>
+    
+
+    <div class="form-group">
+        <label>username</label>
+        <input class="form-control" type="username" name="username" value="errorKim" placeholder="input your username" >
+    </div>
+
+
+    <div class="form-group">
+        <label>password</label>
+        <input class="form-control" type="text" name="password" value="123456" placeholder="input your password" >
+    </div>
+    
+
+    <div class="form-group">
+        <input class="btn btn-warning btn-lg btn-block" type="submit" value="회원가입하기" >
+    </div>
+
+    
+</form>
+
+<div class="form-group">
+    <a class="btn btn-primary btn-lg btn-block" href="/articles"> 돌아가기</a>       
+</div>
+
+
+{% endblock %}

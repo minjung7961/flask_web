@@ -5,6 +5,7 @@
 <hr class="my-4">
 
 <form action="/{{article[0]}}/edit" method="POST" onsubmit="return confirm('정말 수정 하시겠습니까?')">
+
     <div class="form-group">
         <label>TITLE</label>
         <input class="form-control" type="text" name='title' value="{{article[1]}}" placeholder="input your title" required>
@@ -13,7 +14,7 @@
 
     <div class="form-group">
         <label>DESCRIPTON</label>
-        <input class="form-control" type="text" name="desc" value="{{article[2]}}" placeholder="input your description" required>
+            <textarea class="form-control" name="desc"  required>{{article[2]}}</textarea>
     </div>
     
 
