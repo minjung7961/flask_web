@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from passlib.hash import sha256_crypt
 from data import Articles
 import pymysql
 
@@ -111,13 +112,13 @@ def register():
         name = request.form['name']
         email = request.form['email']
         username = request.form['username']
-        password = request.form['password']
+        password = sha256_crypt.encrypt(request.form['password'])
         value_lsit = [name, email, username, password]
         sql =f"INSERT INTO users (`name`, `email`, `username`, `password`) VALUES ('{name}', '{email}', '{username}', '{password}');"
         print(sql)
         cursor.execute(sql)
         db.commit()
-        return render_template("register.html")
+        return redirect("/user_list")
 
 @app.route('/user_list', methods=['POST','GET'])
 def user_list():
@@ -130,6 +131,32 @@ def user_list():
         users = cursor.fetchall()
         print(users)
         return render_template("user_list.html",users = users)
+
+
+
+@app.route('/login', methods=['POST','GET'])
+def login():
+    cursor = db.cursor()
+    if request.method == "POST":
+        # name = request.form['name']
+        email = request.form['email']
+        # username = request.form['username']
+        get_password = request.form['password']
+        print(email, get_password)
+        sql = f"SELECT * FROM users WHERE email = '{email}';"        
+        cursor.execute(sql)
+        user = cursor.fetchone()
+        print(user)
+        if user == None :
+            print(user)
+            return "none"
+        else:
+            if sha256_crypt.verify(get_password, user[4]):
+                return "success login /user_list -> post"
+            return "dont match password /user_list -> post", user[4]
+    else:   
+        return render_template("user_list.html",users = users)
+        
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
     app.run() # 애가 서버 실행시켜줌
