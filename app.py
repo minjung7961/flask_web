@@ -118,6 +118,18 @@ def register():
         cursor.execute(sql)
         db.commit()
         return render_template("register.html")
+
+@app.route('/user_list', methods=['POST','GET'])
+def user_list():
+    cursor = db.cursor()
+    if request.method == "POST":
+        return "/user_list -> post"
+    else:   
+        sql = 'SELECT * FROM users;'
+        cursor.execute(sql)
+        users = cursor.fetchall()
+        print(users)
+        return render_template("user_list.html",users = users)
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
     app.run() # 애가 서버 실행시켜줌
