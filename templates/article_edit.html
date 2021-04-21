@@ -7,19 +7,19 @@
 <form action="/edit" method="POST" onsubmit="return confirm('정말 수정 하시겠습니까?')">
     <div class="form-group">
         <label>TITLE</label>
-        <input class="form-control" type="text" name='title' placeholder="input your title" required>
+        <input class="form-control" type="text" name='title' value="{{article[1]}}" placeholder="input your title" required>
     </div>
 
 
     <div class="form-group">
         <label>DESCRIPTON</label>
-        <textarea class="form-control" name="desc" placeholder="input your description" required></textarea>
+        <input class="form-control" type="text" name="desc" value="{{article[2]}}" placeholder="input your description" required>
     </div>
     
 
     <div class="form-group">
         <label>AUHOR</label>
-        <input type="text" name='author' class="form-control" value="민쭁이" placeholder="input your name" disabled>
+        <input type="text" name='author' class="form-control" value="{{article[3]}}" placeholder="input your name" disabled>
     </div>
 
 

@@ -85,12 +85,17 @@ def delete(id):
 
 @app.route('/<int:id>/edit', methods=['POST','GET'])
 def edit(id):
-    # cursor = db.cursor()
-    # sql = f'DELETE FROM topic WHERE id = {id};'
-    # print("sql")
-    # cursor.execute(sql)
-    # db.commit()
-    return render_template("article_edit.html")
+    cursor = db.cursor()
+    if request.method == "POST":
+        return "Success"
+    else:   
+        sql = f'SELECT * FROM topic WHERE id={id};'
+        print("sql")
+        cursor.execute(sql)
+        topic = cursor.fetchone()
+        print(topic)
+        # db.commit()
+        return render_template("article_edit.html",article = topic)
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
     app.run() # 애가 서버 실행시켜줌
