@@ -149,13 +149,13 @@ def login():
         print(user)
         if user == None :
             print(user)
-            return "none"
+            return redirect("/register")
         else:
             if sha256_crypt.verify(get_password, user[4]):
-                return "success login /user_list -> post"
-            return "dont match password /user_list -> post", user[4]
+                return redirect("/articles")
+            return render_template("login.html")
     else:   
-        return render_template("user_list.html",users = users)
+        return render_template("login.html")
         
 # app.py 파일을 가장 먼저 실행하겠다라는 내용 (그중 이줄부터 실행할것이란 소리)
 if __name__ == '__main__':
